@@ -1,12 +1,29 @@
-function fizzBuzz(number){
-  this.number = number
-  return number
-}
+var FizzBuzz = function () {};
 
-fizzBuzz.prototype.isDivisibleBy = function(divisor, number) {
-  if (number % divisor === 0) {
-    return true;
+FizzBuzz.prototype.isDivisibleByThree = function(number) {
+  return this._isDivisibleBy(number, 3);
+};
+
+FizzBuzz.prototype.isDivisibleByFive  = function(number){
+  return this._isDivisibleBy(number, 5);
+};
+
+FizzBuzz.prototype.isDivisibleByFifteen = function(number){
+  return ( this.isDivisibleByThree(number) && this.isDivisibleByFive(number) );
+};
+
+FizzBuzz.prototype._isDivisibleBy = function(number, divisor){
+  return( number % divisor === 0 );
+};
+
+FizzBuzz.prototype.says = function(number){
+  if( this.isDivisibleByFifteen(number) ){
+    return "FizzBuzz"
+  } else if ( this.isDivisibleByThree(number) ){
+    return "Fizz"
+  } else if( this.isDivisibleByFive(number) ){
+    return "Buzz"
   } else {
-    return false;
+  return number
   }
-}
+};
